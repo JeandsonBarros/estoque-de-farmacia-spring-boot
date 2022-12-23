@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="~{includes/head :: head(title='Gerenciar usuários')}"></head>
+<body>
+<header th:replace="~{includes/header :: header}"></header>
+<main class="container">
+
+    <section class="d-flex justify-content-center">
+
+        <div class="rounded-4 flex-column shadow p-5 mt-3" style="width: 500px;">
+
+            <form method="post"
+                  th:action="@{/usuario/conta}">
+
+                <h2 class="fw-bold mb-4">Dados da conta</h2>
+
+                <div th:if="${(param.status_deletar != null) and (param.status_deletar[0] == 'erro-deletar-conta')}">
+                    <div class="alert alert-primary" role="alert">
+                        <span>Erro ao deletar conta!</span>
+                    </div>
+                </div>
+
+                <div th:if="${mensagem}">
+                    <div class="alert alert-primary" role="alert" th:text="${mensagem}"></div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-4" name="nome" id="nome"
+                           placeholder="exemplo" th:value="${usuarioDados}? ${usuarioDados.nome} : ''">
+                    <label for="nome">Nome</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="date" class="form-control rounded-4" name="dataNascimento" id="dataNascimento"
+                           placeholder="Data de nascimento"
+                           th:value="${usuarioDados}? ${usuarioDados.dataNascimento} : ''">
+                    <label for="dataNascimento">Data de nascimento</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control rounded-4" name="email" id="email"
+                           placeholder="email@exemplo.com" th:value="${usuarioDados}? ${usuarioDados.email} : ''">
+                    <label for="email">Email</label>
+                </div>
+
+                <button class="w-100 mb-2 btn btn-lg rounded-4 btn-dark" type="submit">Atualizar dados</button>
+
+            </form>
+            <hr class="my-4">
+
+            <form method="post" th:action="@{/usuario/atualizar-senha}">
+
+                <h2 class="fw-bold mb-4">Atualizar senha</h2>
+
+                <div th:if="${param.status_senha != null}">
+                    <div class="alert alert-primary" role="alert">
+                        <span th:if="${param.status_senha[0] == 'campos-erro'}">Verifique os campos!</span>
+                        <span th:if="${param.status_senha[0] == 'senhas-nao-correspondem'}">Senhas não correspondem!</span>
+                        <span th:if="${param.status_senha[0] == 'senha-sucesso'}">Senha atualizada com sucesso!</span>
+                        <span th:if="${param.status_senha[0] == 'senha-erro'}">Erro ao atualizar senha!</span>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control rounded-4" name="senha" id="senha"
+                           placeholder="Senha">
+                    <label for="senha">Senha</label>
+                </div>
+
+                <p class="text-danger" th:text="${mensagemSenha}? ${mensagemSenha} : ''"></p>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control rounded-4" name="confirmaSenha"
+                           id="confirmaSenha" placeholder="Confirmar senha">
+                    <label for="confirmaSenha">Confirmar senha</label>
+                </div>
+
+                <button class="w-100 mb-2 btn btn-lg rounded-4 btn-dark" type="submit">Atualizar senha</button>
+
+            </form>
+
+            <hr class="my-4">
+
+            <a href="/usuario/deletar-[conta" class="w-100 btn btn-lg btn-danger rounded-4">Deletar conta</a>
+
+        </div>
+
+    </section>
+
+</main>
+<footer th:replace="~{includes/footer :: footer}"></footer>
+</body>
+</html>

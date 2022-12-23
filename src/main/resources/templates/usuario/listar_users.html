@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="~{includes/head :: head(title='Gerenciar usuários')}"></head>
+<body>
+<header th:replace="~{includes/header :: header}"></header>
+
+<div class="px-3 py-2 border-bottom mb-3 text-bg-danger">
+
+    <div class="container d-flex flex-wrap justify-content-start">
+
+        <form method="get" th:action="@{/usuario/buscar}" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto"
+              role="search">
+            <input
+                    type="search"
+                    class="form-control"
+                    name="nome"
+                    placeholder="Buscar usuário"
+                    aria-label="Search"
+                    th:value="${param.nome}? ${param.nome[0]} : ''"
+            >
+        </form>
+
+    </div>
+
+</div>
+
+<main class="container">
+
+    <h1 class="mt-3">Usuários</h1>
+
+    <section>
+
+        <div th:if="${param.status != null}">
+            <div th:if="${param.status[0] == 'deletado'}">
+                <div class="alert alert-success m-2" role="alert">
+                    <strong>Usuário deletado!</strong>
+                </div>
+            </div>
+
+            <div th:if="${param.status[0] == 'erro'}">
+                <div class="alert alert-danger m-2" role="alert">
+                    <strong>Erro ao deletar!</strong>
+                </div>
+            </div>
+
+            <div th:if="${param.status[0] == 'nao-encontrado'}">
+                <div class="alert alert-danger m-2" role="alert">
+                    <strong>Usuário não encontrado!</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center flex-row flex-wrap">
+
+            <div class="card m-2" style="width: 16rem;" th:each="usuario: ${usuarios}">
+
+                <div class="card-body">
+                    <h5 th:text="${usuario.nome.length} <= 50? ${usuario.nome} : ${#strings.substring(usuario.nome,0,50)}+'...'"
+                        class="card-title"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" th:text="'CPF: ' + ${usuario.cpf}"></h6>
+                    <p class="card-text" th:text="'E-mail: ' + ${usuario.email}"></p>
+                    <p class="card-text" th:text="'Nascimento: ' + ${usuario.dataNascimento}"></p>
+                    <p class="card-text" th:text="'Função: ' + ${usuario.role}"></p>
+                    <div th:if="${usuario.role} == 'USER'">
+                        <a th:href="@{/usuario/deletar-um-usuario/}+${usuario.cpf}" class="btn btn-danger">
+                            <span>Deletar</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-trash-fill ms-1" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+<footer th:replace="~{includes/footer :: footer}"></footer>
+</body>
+</html>

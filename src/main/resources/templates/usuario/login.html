@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{includes/head :: head(title='Login')}"></head>
+<body>
+<header th:replace="~{includes/header :: header}"></header>
+
+<main>
+    <section class="d-flex justify-content-center">
+
+        <form class="rounded-4 shadow p-5 mt-5" style="width: 25rem;" method="post"
+              th:action="@{/usuario/login}">
+
+            <h2 class="fw-bold mb-4">Login</h2>
+
+            <div th:if="${mensagem}">
+                <div class="alert alert-primary" role="alert" th:text="${mensagem}"></div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control rounded-4" name="username" id="email"
+                       placeholder="email@exemplo.com" th:value="${usuarioDados}? ${usuarioDados.email} : ''">
+                <label for="email">Email</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-4" name="password" id="senha"
+                       placeholder="Senha" >
+                <label for="senha">Senha</label>
+            </div>
+
+            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-dark" type="submit">Entrar</button>
+
+            <hr class="my-4">
+
+            <a href="/usuario/cadastro" class="w-100 btn btn-lg btn-dark rounded-4">Cadastrar-se</a>
+
+        </form>
+
+    </section>
+</main>
+
+
+<footer th:replace="~{includes/footer :: footer}"></footer>
+</body>
+</html>

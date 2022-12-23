@@ -1,0 +1,72 @@
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="~{includes/head :: head(title='Login')}"></head>
+<body>
+<header th:replace="~{includes/header :: header}"></header>
+<main>
+
+    <section class="d-flex justify-content-center">
+
+        <form class="rounded-4 shadow p-5 mt-3" style="max-width: 400px;" method="post"
+              th:action="@{/usuario/cadastro}">
+
+            <h2 class="fw-bold mb-4">Cadastre-se</h2>
+
+            <div th:if="${mensagem}">
+                <div class="alert alert-primary" role="alert" th:text="${mensagem}"></div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control rounded-4" name="nome" id="nome"
+                       placeholder="exemplo" th:value="${usuarioDados}? ${usuarioDados.nome} : ''">
+                <label for="nome">Nome</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control rounded-4" name="cpf" id="cpf"
+                       placeholder="CPF" th:value="${usuarioDados}? ${usuarioDados.cpf} : ''">
+                <label for="nome">CPF</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control rounded-4" name="dataNascimento" id="dataNascimento"
+                       placeholder="Data de nascimento" th:value="${usuarioDados}? ${usuarioDados.dataNascimento} : ''">
+                <label for="dataNascimento">Data de nascimento</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control rounded-4" name="email" id="email"
+                       placeholder="email@exemplo.com" th:value="${usuarioDados}? ${usuarioDados.email} : ''">
+                <label for="email">Email</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-4" name="senha" id="senha"
+                       placeholder="Senha" >
+                <label for="senha">Senha</label>
+            </div>
+
+            <p class="text-danger" th:text="${mensagemSenha}? ${mensagemSenha} : ''"></p>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control rounded-4" name="confirmaSenha"
+                       id="confirmaSenha" placeholder="Confirmar senha">
+                <label for="confirmaSenha">Confirmar senha</label>
+            </div>
+
+            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-dark" type="submit">Cadastrar</button>
+            <small class="text-muted">Ao clicar em Inscrever-se, concordara com os termos de uso.</small>
+
+            <hr class="my-4">
+
+            <a href="/login" class="w-100 btn btn-lg btn-dark rounded-4">Entrar</a>
+
+        </form>
+
+    </section>
+
+</main>
+<footer th:replace="~{includes/footer :: footer}"></footer>
+
+</body>
+
+</html>
