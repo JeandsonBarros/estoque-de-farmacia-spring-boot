@@ -1,44 +1,37 @@
-package com.farmacia.demo.models;
+package com.farmacia.demo.dtos;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-@Entity
-public class Usuario {
+public class FarmaciaDTO {
 
-    @Id
     @NotNull
-    private Long cpf;
+    private Long cnpj;
     @Email
     @NotEmpty
-    @Column(unique=true)
     private String email;
     @NotEmpty
     private String nome;
     @NotEmpty
-    private String dataNascimento;
-    @NotEmpty
     private String senha;
+    @NotEmpty
+    private String confirmaSenha;
 
-    //USER OU ADMIN
-    private String role;
-
-    public String getRole() {
-        return role;
+    public String getConfirmaSenha() {
+        return confirmaSenha;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setConfirmaSenha(String confirmaSenha) {
+        this.confirmaSenha = confirmaSenha;
     }
 
-    public Long getCpf() {
-        return cpf;
+    public Long getCnpj() {
+        return cnpj;
     }
 
-    public void setCpf(Long cpf) {
-        this.cpf = cpf;
+    public void setCnpj(Long cnpj) {
+        this.cnpj = cnpj;
     }
 
     public String getEmail() {
@@ -55,14 +48,6 @@ public class Usuario {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
     }
 
     public String getSenha() {

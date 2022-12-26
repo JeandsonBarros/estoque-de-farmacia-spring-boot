@@ -11,7 +11,7 @@
         <div class="rounded-4 flex-column shadow p-5 mt-3" style="width: 500px;">
 
             <form method="post"
-                  th:action="@{/usuario/conta}">
+                  th:action="@{/farmacia/conta}">
 
                 <h2 class="fw-bold mb-4">Dados da conta</h2>
 
@@ -27,20 +27,13 @@
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control rounded-4" name="nome" id="nome"
-                           placeholder="exemplo" th:value="${usuarioDados}? ${usuarioDados.nome} : ''">
+                           placeholder="exemplo" th:value="${farmaciaDados}? ${farmaciaDados.nome} : ''">
                     <label for="nome">Nome</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="date" class="form-control rounded-4" name="dataNascimento" id="dataNascimento"
-                           placeholder="Data de nascimento"
-                           th:value="${usuarioDados}? ${usuarioDados.dataNascimento} : ''">
-                    <label for="dataNascimento">Data de nascimento</label>
-                </div>
-
-                <div class="form-floating mb-3">
                     <input type="email" class="form-control rounded-4" name="email" id="email"
-                           placeholder="email@exemplo.com" th:value="${usuarioDados}? ${usuarioDados.email} : ''">
+                           placeholder="farmácia@email.com" th:value="${farmaciaDados}? ${farmaciaDados.email} : ''">
                     <label for="email">Email</label>
                 </div>
 
@@ -49,7 +42,7 @@
             </form>
             <hr class="my-4">
 
-            <form method="post" th:action="@{/usuario/atualizar-senha}">
+            <form method="post" th:action="@{/farmacia/atualizar-senha}">
 
                 <h2 class="fw-bold mb-4">Atualizar senha</h2>
 
@@ -65,7 +58,7 @@
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control rounded-4" name="senha" id="senha"
                            placeholder="Senha">
-                    <label for="senha">Senha</label>
+                    <label for="senha">Nova senha</label>
                 </div>
 
                 <p class="text-danger" th:text="${mensagemSenha}? ${mensagemSenha} : ''"></p>
@@ -81,7 +74,7 @@
 
             <hr class="my-4">
 
-            <a href="/usuario/deletar-[conta" class="w-100 btn btn-lg btn-danger rounded-4">Deletar conta</a>
+            <button onclick="deleteConfirm()" class="w-100 btn btn-lg btn-danger rounded-4">Deletar conta</button>
 
         </div>
 
@@ -89,5 +82,14 @@
 
 </main>
 <footer th:replace="~{includes/footer :: footer}"></footer>
+
+<script >
+    function deleteConfirm() {
+    if (confirm("Realmente deseja deletar está conta? Todos os dados serão removidos de maneira permanente.")) {
+        window.location.href = `${location.origin}/farmacia/deletar-conta`
+    }
+}
+</script>
+
 </body>
 </html>

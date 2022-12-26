@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ProdutoDTO {
 
-    private Long id;
+
     @NotEmpty
     private String nome;
     @NotEmpty
@@ -19,14 +19,6 @@ public class ProdutoDTO {
     private double valor;
     @NotNull
     private int quantidadeDisponivel;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;

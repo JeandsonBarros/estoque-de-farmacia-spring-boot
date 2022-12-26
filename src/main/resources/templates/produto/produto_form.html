@@ -14,6 +14,10 @@
 
             <form method="post" th:action="${produto}? @{/atualizar-produto/}+${produto.id} : @{/cadastrar-produto}" enctype="multipart/form-data">
 
+                <div th:if="${mensagem}">
+                    <div class="alert alert-primary" role="alert" th:text="${mensagem}"></div>
+                </div>
+
                 <div th:if="${produto}">
                     <figure class="figure">
                         <img th:src="@{/get-file/}+${produto.nomeImagem}" height="100" width="200" class="figure-img img-fluid rounded" alt="...">
@@ -33,7 +37,12 @@
 
                 <div class="mb-2">
                     <span for="dataDeValidade">Data de validade</span>
-                    <input type="date" id="dataDeValidade" name="dataDeValidade" th:value="${produto}? ${produto.dataDeValidade} : ''" class="form-control" >
+                    <input
+                            type="date"
+                            id="dataDeValidade"
+                            name="dataDeValidade"
+                            th:value="${produto}? ${#dates.format(produto.dataDeValidade, 'yyyy-MM-dd')} : ''"
+                            class="form-control" >
                 </div>
 
                 <div class="mb-2">

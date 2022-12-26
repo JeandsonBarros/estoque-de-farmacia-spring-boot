@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" th:href="@{/img/capsule.svg}">
+  <title>Farmácia - Erro</title>
+  <style>
+    body,
+    html,
+    main {
+      min-height: 100vh;
+    }
+
+    .interrogacao {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid white;
+      text-align: center;
+      animation: spinner 3s linear infinite;
+
+    }
+
+    @keyframes spinner {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-info text-dark d-flex justify-content-center align-items-center">
+
+  <div class="flex-column d-flex justify-content-center align-items-center">
+    <h1 class="interrogacao">?</h1>
+    <h1>Erro 404</h1>
+    <h3>Pagina não encontrada</h3>
+    <a href="/">Voltar para o início</a>
+  </div>
+
+</body>
+
+</html>

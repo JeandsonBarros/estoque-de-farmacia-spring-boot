@@ -1,3 +1,22 @@
+<!--
+⠀⠀⠀⠀⠀⢸⠓⢄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⠀⠀⠑⢤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢸⡆⠀⠀⠀⠙⢤⡷⣤⣦⣀⠤⠖⠚⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⣠⡿⠢⢄⡀⠀⡇⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠸⠷⣶⠂⠀⠀⠀⣀⣀⠀⠀⠀
+⢸⣃⠀⠀⠉⠳⣷⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠉⠉⠉⠉⠉⢉⡭⠋
+⠀⠘⣆⠀⠀⠀⠁⠀⢀⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀
+⠀⠀⠘⣦⠆⠀⠀⢀⡎⢹⡀⠀⠀⠀⡀⠀⠀⡀⣠⠔⠋⠀⠀⠀⠀
+⠀⠀⠀⡏⠀⠀⣆⠘⣄⠸⢧⠀⠀⠀⠀⢀⣠⠖⢻⠀⠀⠀⣿⢥⣄⣀⣀⣀⠀⠀
+⠀⠀⢸⠁⠀⠀⡏⢣⣌⠙⠚⠀⠀⠠⣖⡛⠀⣠⠏⠀⠀⠀⠇⠀⠀⠀⠀⢙⣣⠄
+⠀⠀⢸⡀⠀⠀⠳⡞⠈⢻⠶⠤⣄⣀⣈⣉⣉⣡⡔⠀⠀⢀⠀⠀⣀⡤⠖⠚⠀⠀
+⠀⠀⡼⣇⠀⠀⠀⠙⠦⣞⡀⠀⢀⡏⠀⢸⣣⠞⠀⠀⠀⡼⠚⠋⠁⠀⠀⠀⠀⠀
+⠀⢰⡇⠙⠀⠀⠀⠀⠀⠀⠉⠙⠚⠒⠚⠉⠀⠀⠀⠀⡼⠁⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢧⡀⠀⢠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠙⣶⣶⣿⠢⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠉⠀⠀⠀⠙⢿⣳⠞⠳⡄⠀⠀⠀⢀⡞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠹⣄⣀⡤⠋⠀⠀⠀⠀⠀⠀⠀⠀
+-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="~{includes/head :: head(title='Início')}"></head>
@@ -50,6 +69,8 @@
 
         <div class="d-flex justify-content-center flex-row flex-wrap">
 
+            <p th:if="${#lists.size(produtos) == 0}">Nem um produto</p>
+
             <div class="card m-2" style="width: 16rem;" th:each="produto: ${produtos}">
 
                 <img th:src="@{/get-file/}+${produto.nomeImagem}" class="card-img-top" alt="...">
@@ -57,7 +78,9 @@
                 <div class="card-body">
                     <h5 th:text="${produto.nome.length} <= 50? ${produto.nome} : ${#strings.substring(produto.nome,0,50)}+'...'"
                         class="card-title"></h5>
-                    <p th:text="'R$: ' + ${produto.valor}" class="card-text fs-5"></p>
+                    <span th:text="'R$: ' + ${produto.valor}"></span><br>
+                    <span th:text="'Quantidade disponível: ' + ${produto.quantidadeDisponivel}"></span><br>
+                    <p th:text="'Data de validade: ' + ${#dates.format(produto.dataDeValidade, 'dd/MM/yyyy')}"></p>
                     <a th:href="@{/atualizar-produto/}+${produto.id}" class="btn btn-primary">
                         <span>Detalhes</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
