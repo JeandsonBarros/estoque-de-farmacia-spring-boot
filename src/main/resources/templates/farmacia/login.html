@@ -12,8 +12,10 @@
 
             <h2 class="fw-bold mb-4">Login</h2>
 
-            <div th:if="${mensagem}">
-                <div class="alert alert-primary" role="alert" th:text="${mensagem}"></div>
+            <div th:if="${(param.error != null) and (param.error[0] == 'true')}">
+                <div class="alert alert-danger m-1" role="alert">
+                    <strong>Credencias inválidas ou conta inexistente!!</strong>
+                </div>
             </div>
 
             <div class="form-floating mb-3">
